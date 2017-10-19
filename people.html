@@ -2,16 +2,24 @@
 <html>
 	<head>
 		<title>people Information</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     	<script src="/swinfo/scripts/people.js"></script>
 	</head>
 
 	<body ng-app="swInfo">
 		<div ng-controller="people">
-			<form ng-submit="searchPeople()">
-			Character Name: <input type="text" ng-model="searchName" />
+			<form name="searchForm">
+			Character Name: <input type="text" name="searchName" ng-model="searchName" ng-minlength="2" ng-pattern="{{regex}}" required/>
+			<ng-messages for="!searchForm.searchName.$valid" role="alert">
+			<div ng-show="searchForm.searchName.$invalid && searchForm.searchName.$touched">
+				<h1>I've Got A Bad Feeling About This</h1>
+				<p ng-show"searchForm.searchName.$error.required">You must enter a character name.</p>
+				<p ng-show="searchForm.searchName.$error.minlength">Please enter at least two (2) letters/numbers. For C-3PO enter c-, or c-3.</p>
+				<p ng-show="searchForm.searchName.$error.pattern">Please only use letters, numbers, dashes, underscores, or periods.</p>
+			</div>
+			<input type="submit" value="Use the Force" ng-click="searchPeople()" />
 		</form>
 		</div>
-		<div class="modal"
+
 	</body>
 </html>
