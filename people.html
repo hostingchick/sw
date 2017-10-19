@@ -8,9 +8,9 @@
 
 	<body>
 		<div ng-app="swinfo" ng-controller="people">
-			<form ng-submit="searchPeople()">
-			Character Name: <input type="text" ng-model="searchname">
-			<input type="submit" text="Use the Force">
+			<form>
+			Character Name: <input type="text" ng-model="searchname" />
+			<input type="button" text="Use the Force" ng-click="searchPeople()" value="submit" />
 		</form>
 		<p>{{searchText}}</p>
 		</div>

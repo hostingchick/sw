@@ -1,12 +1,11 @@
 var app = angular.module('swinfo', []);
-app.controller('people', function($scope, $http) {
-  $http({
-    method : "GET",
-    url : "https://swapi.co/api/people?search=" + $scope.searchname
-  }).then(function mySuccess(response) {
-      $scope.searchPeople = function () {
-            $scope.searchText = response.data.results;
-    }, function myError(response) {
-      $scope.searchname = response.statusText;
-  });
-});
+
+function people($scope) {
+    $scope.searchname = null;
+    $scope.searchPeople = function () {
+      $http.get("https://swapi.co/api/people?search=" + $scope.searchname)
+      .then(function(response) {
+          alert($scope.searchText = response.data.results);
+      });
+    }
+}
