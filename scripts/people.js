@@ -1,11 +1,13 @@
-var app = angular.module('swinfo', []);
-
-function people($scope) {
-    $scope.searchname = null;
-    $scope.searchPeople = function () {
-      $http.get("https://swapi.co/api/people?search=" + $scope.searchname)
-      .then(function(response) {
-          alert($scope.searchText = response.data.results);
-      });
-    }
-}
+var swInfo = angular.module('swInfo', []);
+swInfo.controller('people', function($scope,$http) {
+  $scope.searchPeople = function() {
+    var searchurl = "https://swapi.co/api/people?search="+ $scope.searchName;
+    $http({method: 'GET', url: searchurl}).
+    success(function(data,status,headers,config){
+      alert(JSON.stringify(data.results));
+    }).
+    error(function(data,status,headers,config){
+      alert(status);
+    });
+  }
+});
